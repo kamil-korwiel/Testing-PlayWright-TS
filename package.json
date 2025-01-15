@@ -6,7 +6,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "npx playwright test",
+    "test:show-report": "npx monocart show-report ./test-results/monocart-report.html",
+    "coverage:show-report": "open-cli ./test-results/code-coverage/v8/index.html"
   },
   "repository": {
     "type": "git",

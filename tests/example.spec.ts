@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures/app-fixture';
 
 
 // Use test and expect as usual

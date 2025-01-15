@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from "path";
+// import { getMonocartReporterOptions } from "playwright.monocart-reporter";
 
 /**
  * Read environment variables from file.
@@ -11,6 +13,11 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+// const _testsDir = path.resolve("./tests");
+// const _testResultsDir = path.resolve("./test-results");
+// const _codeCoverageDir = path.resolve(_testResultsDir, "code-coverage");
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -22,7 +29,19 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['list'],['html'],['monocart-reporter', {outputFile: 'monocart-report/index.html'}]],
+  reporter: [
+    ['list'],
+    ['html'],
+    ['monocart-reporter', {  
+      name: "My Test Report",
+      outputFile: './monocart-report/index.html',
+      // global coverage report options
+      coverage: {
+          entryFilter: (entry) => true,
+          sourceFilter: (sourcePath) => sourcePath.search(/src\/.+/) !== -1,
+      }
+    }]
+],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
